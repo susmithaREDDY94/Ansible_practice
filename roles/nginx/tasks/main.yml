@@ -1,0 +1,13 @@
+---
+- name: Install nginx webserver
+  become: true
+  yum: name=nginx state=present
+- name: Start service
+  become: true
+  service: name=nginx state=started
+- name: Deploy html file
+  become: true
+  copy:
+    src=index1.html dest=/var/www/html/
+  notify: Restart nginx
+
